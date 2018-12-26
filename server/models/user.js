@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
 
-var UserSchema = new mongoose.Schema({ 
+var UserSchema = new mongoose.Schema({
  email: {
     type: String,
     required: true,
@@ -52,6 +52,36 @@ UserSchema.methods.generateAuthToken = function (){
 		//console.log('Returning token from method',token);
 		return token;
 	});
+};
+
+
+//Above is instance method below is model method ,what is the difference ?
+UserSchema.statics.findByToken = function(token) {
+	var User = this;
+	var decoded;
+
+	try{
+
+		decoded = jwt.verify(token,'abc123');
+		console.log('decoded token into object', decoded);
+
+	}catch (e) {
+		return new Promise((resolve,reject) => {
+			console.log('decoded token into object1',decoded);
+			reject();
+		});
+		// above statement is equivalent to
+		// return Promise.reject();
+
+	}
+
+	return User.findOne({
+		'_id': decoded._id,
+		'tokens.token': token,
+		'tokens.access':'auth'
+	});
+
+
 };
 
 var User = mongoose.model('User', UserSchema);
