@@ -28,7 +28,7 @@ var {ObjectID} = require('mongodb');
 var {mongoose} = require('./db/mongoose.js')
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
-const authenticate = require('./middleware/authenticate');
+const {authenticate} = require('./middleware/authenticate');
 
 
 var app = express();

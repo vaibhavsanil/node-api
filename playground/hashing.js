@@ -1,6 +1,24 @@
 const {SHA256} = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const {ObjectID} = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+
+
+
+var password = '12abc!';
+
+/*bcrypt.genSalt(10, (err, salt) => {
+	bcrypt.hash(password, salt, (err, hash) => {
+		console.log(hash);
+	});
+});*/
+
+var hashedPassword = '$2a$10$90fVZEC3FArc6kuq2ekvg.TMY6ebCblYX6a9xmGf5NWlZNZao707e';
+
+bcrypt.compare(password, hashedPassword, (err, res) => {
+	console.log(res);
+});
 
 /*var message = 'My name is Vaibhav';
 var hash = SHA256(message).toString();
@@ -8,7 +26,7 @@ var hash = SHA256(message).toString();
 console.log(`Message: ${message}`);
 console.log(`Hash: ${hash}`);*/
 
-var data = {
+/*var data = {
 	    "_id" : "5c21d75ef0c590a878b24dc7",
 	    "email" : "vaibhav45@ssmsinfotech.com",
 	    "password" : "aabc!123",
@@ -27,7 +45,7 @@ var token = jwt.sign(data, '123abc');
 console.log(token);
 
 var decoded = jwt.verify(token,'123abc');
-console.log('decoded',decoded);
+console.log('decoded',decoded);*/
 
 /*var token = {
 	data,
