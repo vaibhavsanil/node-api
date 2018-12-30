@@ -64,11 +64,11 @@ UserSchema.statics.findByToken = function(token) {
 	try{
 
 		decoded = jwt.verify(token,'abc123');
-		console.log('decoded token into object', decoded);
+		//console.log('decoded token into object', decoded);
 
 	}catch (e) {
 		return new Promise((resolve,reject) => {
-			console.log('decoded token into object1',decoded);
+			//console.log('decoded token into object1',decoded);
 			reject();
 		});
 		// above statement is equivalent to
